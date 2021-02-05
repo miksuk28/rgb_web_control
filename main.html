@@ -1,0 +1,29 @@
+<html>
+<head>
+<script>
+function readRGB(color){
+if (color.length == 0) {
+	document.getElementById("txtHint").innerHTML = "";
+	return;
+}
+else {
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 400) {
+			document.getElementById("txtHint").innerHTML = this.responseText;
+		}
+	};
+	temp = encodeURIComponent(color);
+	xmlhttp.open("GET", "action_page.php?q=" + temp, true);
+	xmlhttp.send();
+	}
+}
+</script>
+</head>
+<body>
+<form action="/action_page.php" method="post">
+	Select A Color:
+	<input type="color" name="favcolor" value="#ff0000" onchange="readRGB(this.value)">
+
+</body>
+</html>
